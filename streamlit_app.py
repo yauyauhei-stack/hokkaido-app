@@ -10,7 +10,9 @@ st.markdown("""
         background-position: center;
         background-attachment: fixed;
     }
-    
+    h1, h2, h3, p, div {
+        color: white !important;
+    }
     .content-card {
         background: rgba(255, 255, 255, 0.05); /* 更薄的毛玻璃 */
         backdrop-filter: blur(10px);
