@@ -86,4 +86,4 @@ components.html(f"""
     </script>
 </body>
 </html>
-""", height=800)
+components.html(f"""...""", height=1000, scrolling=False)
