@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# 強制清除 Streamlit 的所有 UI 限制
+# 強制設定頁面寬度，隱藏預設 Streamlit 邊距與 UI
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 st.markdown("""<style>
     [data-testid="stAppViewContainer"] { background-color: black !important; }
@@ -9,7 +9,7 @@ st.markdown("""<style>
     #MainMenu, footer, header { visibility: hidden; }
 </style>""", unsafe_allow_html=True)
 
-# 定義 7 天行程與詳細資料
+# 定義行程內容
 itinerary = [
     ("北海道：仲夏夢之旅", "2026年7月16日 | 香港/東京 飛往北海道", "準備迎接北國的涼爽空氣與大自然饗宴。"),
     ("DAY 1", "啟程：抵達與燒肉之夜", "15:00 抵達新千歲機場 | 18:00 前往燒肉店品嚐極上和牛 | 20:30 入住札幌市中心酒店。"),
@@ -46,16 +46,18 @@ for i in range(len(itinerary)):
         </div>
     """
 
-# 使用正確的 components.html 語法
+# 渲染網頁組件
 components.html(f"""
 <!DOCTYPE html>
 <html>
 <head>
     <style>
-        body, html {{ margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: black; }}
+        /* 重設所有屬性以徹底移除邊框 */
+        * {{ margin: 0; padding: 0; box-sizing: border-box; border: none !important; }}
+        body, html {{ height: 100%; width: 100%; background: #000; overflow: hidden; }}
         .scroll-container {{ height: 100vh; width: 100vw; overflow-y: auto; scrollbar-width: none; }}
         .section {{ height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; color: white; background-size: cover; background-position: center; position: relative; }}
-        .text-box {{ text-align: center; padding: 50px; transition: opacity 1s, transform 1s; opacity: 0; transform: translateY(30px); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }}
+        .text-box {{ text-align: center; padding: 50px; transition: opacity 1s, transform 1s; opacity: 0; transform: translateY(30px); }}
         .text-box.visible {{ opacity: 1; transform: translateY(0); }}
         h1 {{ font-size: 70px; margin: 0; font-weight: 700; }}
         .subtitle {{ font-size: 35px; margin: 15px 0; font-weight: 500; opacity: 0.9; }}
@@ -86,4 +88,4 @@ components.html(f"""
     </script>
 </body>
 </html>
-components.html(f"""...""", height=1000, scrolling=False)
+""", height=1000, scrolling=False)
