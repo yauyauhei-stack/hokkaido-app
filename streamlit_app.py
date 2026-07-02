@@ -20,7 +20,7 @@ st.markdown("""
     }
     
     /* 3. 個別調教文字大小的區塊 (你可以自由修改 px 數值) */
-    .title-size { font-size: 72px !important; font-weight: bold; margin-bottom: 20px; }/title
+    .title-size { font-size: 72px !important; font-weight: bold; margin-bottom: 40px; }/title
     .subtitle-size { font-size: 50px !important; margin-bottom: 15px; }/second
     .content-size { font-size: 50px !important; line-height: 1.8; margin-bottom: 10px; }/thrid
     
