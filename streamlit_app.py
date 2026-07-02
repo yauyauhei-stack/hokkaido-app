@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# 強制設定頁面寬度，隱藏預設 Streamlit 邊距與 UI
+# 設定頁面為全螢幕，並強制清除邊框與 UI 限制
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 st.markdown("""<style>
     [data-testid="stAppViewContainer"] { background-color: black !important; }
@@ -9,7 +9,7 @@ st.markdown("""<style>
     #MainMenu, footer, header { visibility: hidden; }
 </style>""", unsafe_allow_html=True)
 
-# 定義行程內容
+# 定義 7 天行程與詳細資料
 itinerary = [
     ("北海道：仲夏夢之旅", "2026年7月16日 | 香港/東京 飛往北海道", "準備迎接北國的涼爽空氣與大自然饗宴。"),
     ("DAY 1", "啟程：抵達與燒肉之夜", "15:00 抵達新千歲機場 | 18:00 前往燒肉店品嚐極上和牛 | 20:30 入住札幌市中心酒店。"),
@@ -52,16 +52,31 @@ components.html(f"""
 <html>
 <head>
     <style>
-        /* 重設所有屬性以徹底移除邊框 */
+        /* 移除所有預設邊框與邊距 */
         * {{ margin: 0; padding: 0; box-sizing: border-box; border: none !important; }}
         body, html {{ height: 100%; width: 100%; background: #000; overflow: hidden; }}
+        
         .scroll-container {{ height: 100vh; width: 100vw; overflow-y: auto; scrollbar-width: none; }}
         .section {{ height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; color: white; background-size: cover; background-position: center; position: relative; }}
-        .text-box {{ text-align: center; padding: 50px; transition: opacity 1s, transform 1s; opacity: 0; transform: translateY(30px); }}
+        
+        /* 透明黑色毛玻璃效果 */
+        .text-box {{ 
+            text-align: center; 
+            padding: 40px; 
+            transition: opacity 1s, transform 1s; 
+            opacity: 0; 
+            transform: translateY(30px);
+            background: rgba(0, 0, 0, 0.4); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }}
+        
         .text-box.visible {{ opacity: 1; transform: translateY(0); }}
-        h1 {{ font-size: 70px; margin: 0; font-weight: 700; }}
-        .subtitle {{ font-size: 35px; margin: 15px 0; font-weight: 500; opacity: 0.9; }}
-        .description {{ font-size: 24px; max-width: 800px; line-height: 1.6; opacity: 0.8; }}
+        h1 {{ font-size: 60px; margin: 0; font-weight: 700; }}
+        .subtitle {{ font-size: 25px; margin: 15px 0; font-weight: 500; opacity: 0.9; }}
+        .description {{ font-size: 20px; max-width: 700px; line-height: 1.6; opacity: 0.8; }}
     </style>
 </head>
 <body>
@@ -73,17 +88,22 @@ components.html(f"""
         const sections = document.querySelectorAll('.section');
         let isScrolling = false;
         let currentIndex = 0;
+        
         container.addEventListener('wheel', (e) => {{
             if (isScrolling) return;
             isScrolling = true;
             if (e.deltaY > 0) currentIndex = Math.min(currentIndex + 1, sections.length - 1);
             else currentIndex = Math.max(currentIndex - 1, 0);
+            
             sections[currentIndex].scrollIntoView({{ behavior: 'smooth' }});
+            
             document.querySelectorAll('.text-box').forEach((box, idx) => {{
                 box.classList.toggle('visible', idx === currentIndex);
             }});
+            
             setTimeout(() => {{ isScrolling = false; }}, 800);
         }}, {{ passive: false }});
+        
         document.querySelectorAll('.text-box')[0].classList.add('visible');
     </script>
 </body>
