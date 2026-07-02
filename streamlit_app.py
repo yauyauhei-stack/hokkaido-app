@@ -1,33 +1,43 @@
 import streamlit as st
 
-# 自訂 CSS：純粹的黑色濾鏡背景，無毛玻璃，文字全白
+# 網頁設定
+st.set_page_config(layout="wide")
+
 st.markdown("""
     <style>
-    /* 設定全站背景，疊加黑色濾鏡 */
+    /* 1. 全站背景設定 (已加入你的圖片連結與黑色濾鏡) */
     .stApp {
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
                     url('https://static.gltjp.com/glt/data/article/21000/20526/20231120_140429_94a4429a_w1920.webp');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
     }
     
-    /* 強制所有文字元素為白色 */
+    /* 2. 強制所有文字為白色 */
     h1, h2, h3, p, div {
         color: white !important;
     }
     
-    /* 移除所有玻璃效果，改為純粹的不透明色塊（若需要）或乾淨排版 */
-    .content-box {
+    /* 3. 個別調教文字大小的區塊 (你可以自由修改 px 數值) */
+    .title-size { font-size: 72px !important; font-weight: bold; margin-bottom: 20px; }
+    .subtitle-size { font-size: 36px !important; margin-bottom: 15px; }
+    .content-size { font-size: 24px !important; line-height: 1.8; margin-bottom: 10px; }
+    
+    /* 4. 移除所有玻璃效果，確保背景乾淨 */
+    .clean-box {
         background: transparent;
-        padding: 40px;
-        margin: 20px 0;
+        padding: 20px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# 頁面內容
-st.markdown('<div class="content-box">', unsafe_allow_html=True)
-st.title("北海道：夏日探索")
-st.write("精選頂級航空服務與絕美行程體驗。")
+# 網頁排版內容
+st.markdown('<div class="clean-box">', unsafe_allow_html=True)
+
+# 你可以在這裡自由呼叫不同的 class 來調整每一段的大小
+st.markdown('<div class="title-size">北海道：夏日探索之旅</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle-size">尊享頂級航空服務體驗</div>', unsafe_allow_html=True)
+st.markdown('<div class="content-size">透過香港國泰航空與北海道國際航空 (AIRDO)，為您的家庭打造一場難忘的冒險。</div>', unsafe_allow_html=True)
+
 st.markdown('</div>', unsafe_allow_html=True)
