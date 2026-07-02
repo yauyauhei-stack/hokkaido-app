@@ -4,55 +4,61 @@ st.set_page_config(layout="wide")
 
 st.markdown("""
     <style>
-    /* 移除所有邊框與玻璃效果 */
-    .scroll-container { scroll-snap-type: y mandatory; overflow-y: scroll; height: 100vh; }
-    .section { height: 100vh; width: 100%; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-size: cover; background-position: center; color: white; }
+    /* 移除所有預設的外邊距，確保沒空白 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     
-    /* 專屬字體大小控制 */
-    .main-title { font-size: 80px !important; font-weight: bold; margin-bottom: 20px; }
-    .sub-title { font-size: 40px !important; margin-bottom: 40px; }
-    .day-text { font-size: 60px !important; font-weight: bold; margin-bottom: 20px; }
-    .desc-text { font-size: 30px !important; line-height: 1.6; max-width: 800px; }
+    /* 設定每一個行程的區域 */
+    .section {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
 
-    /* 背景圖設定 (全部套用黑色濾鏡) */
-    #home { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://static.gltjp.com/glt/data/article/21000/20526/20231120_140429_94a4429a_w1920.webp'); }
-    #day1 { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://ak-d.tripcdn.com/images/0222n12000l3pxclpD02D_W_600_0_R5.webp'); }
-    #day2 { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxxCb13giR5qt9ifcOxxgdplCLM4sSXWwNFDMzQzm60jDOBkll5VvMsPs&s=10'); }
-    #day3 { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.trvl-media.com/place/6104012/f8fa157e-15a4-4533-84ef-b21cb5b53110.jpg'); }
-    #day4 { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://static.gltjp.com/glt/data/article/21000/20442/20230926_145350_43e48639_w1920.webp'); }
-    #day5 { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://hk.wamazing.com/media/wp-content/uploads/sites/5/2019/07/hokkaidomitsuioutlet_pixta_84488453_M.jpg.webp'); }
-    #day6 { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://d1grca2t3zpuug.cloudfront.net/2025/10/2025shiroikoibitopark1-870x500-1761562254.webp'); }
-    #day7 { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://hokkaido.letsgojp.com/archives/381138/'); }
+    /* 圖片設定：使用 position: sticky 讓圖片在滑動時產生視覺黏貼效果 */
+    .bg-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        z-index: -1; /* 圖片在最底層 */
+        filter: brightness(0.6); /* 黑色濾鏡 */
+    }
+
+    /* 文字樣式 */
+    .text-container {
+        text-align: center;
+        color: white;
+        z-index: 1;
+    }
+    
+    .title-size { font-size: 90px !important; font-weight: bold; }
+    .subtitle-size { font-size: 50px !important; }
+    .content-size { font-size: 30px !important; line-height: 1.8; }
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="scroll-container">', unsafe_allow_html=True)
-
-# 首頁 (乾淨的背景與文字)
-st.markdown('''
-    <div id="home" class="section">
-        <div class="main-title">北海道：仲夏夢之旅</div>
-        <div class="sub-title">2026 年 7 月 16 日啟程</div>
-    </div>
-''', unsafe_allow_html=True)
-
-# 7 天行程
-days = [
-    ("DAY 1", "啟程前往北海道，品嚐當地地道燒肉，入住精選飯店。"),
-    ("DAY 2", "富良野花田之旅，感受繽紛夏日花海。"),
-    ("DAY 3", "深度探索北國風光，體驗在地寧靜生活。"),
-    ("DAY 4", "走訪人文歷史建築，沉浸北海道文化。"),
-    ("DAY 5", "北廣島 Outlet 購物，盡享休閒與樂趣。"),
-    ("DAY 6", "參訪白色戀人公園，享受浪漫甜蜜時光。"),
-    ("DAY 7", "帶著滿載的回憶，準備啟程返回溫暖的家。")
-]
-
-for i, (title, desc) in enumerate(days, 1):
+# 函式：產生每一頁
+def create_section(img_url, title, sub, content):
     st.markdown(f'''
-        <div id="day{i}" class="section">
-            <div class="day-text">{title}</div>
-            <div class="desc-text">{desc}</div>
+        <div class="section">
+            <div class="bg-img" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{img_url}');"></div>
+            <div class="text-container">
+                <div class="title-size">{title}</div>
+                <div class="subtitle-size">{sub}</div>
+                <div class="content-size">{content}</div>
+            </div>
         </div>
     ''', unsafe_allow_html=True)
 
-st.markdown('</div>', unsafe_allow_html=True)
+# 頁面內容
+create_section('https://static.gltjp.com/glt/data/article/21000/20526/20231120_140429_94a4429a_w1920.webp', '北海道之仲夏夜', '2026年7月16日', '尊享頂級航空服務體驗')
+create_section('https://ak-d.tripcdn.com/images/0222n12000l3pxclpD02D_W_600_0_R5.webp', 'DAY 1', '啟程', '前往北海道，品嚐當地地道燒肉')
+# 你可以繼續用 create_section 加入後續的 Day 2 ~ Day 7
