@@ -29,7 +29,7 @@ imgs = [
     'https://static.gltjp.com/glt/data/article/21000/20442/20230926_145350_43e48639_w1920.webp',
     'https://hk.wamazing.com/media/wp-content/uploads/sites/5/2019/07/hokkaidomitsuioutlet_pixta_84488453_M.jpg.webp',
     'https://d1grca2t3zpuug.cloudfront.net/2025/10/2025shiroikoibitopark1-870x500-1761562254.webp',
-    'https://hokkaido.letsgojp.com/archives/381138/'
+    'https://hk.wamazing.com/media/wp-content/uploads/sites/5/2019/09/shinchitoseairporttaxfree_pixta_94252250_M.jpg.webp'
 ]
 
 # 產生 HTML 區塊
