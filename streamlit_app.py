@@ -39,6 +39,7 @@ imgs = [
 # 產生 HTML 區塊
 sections_html = ""
 for i in range(len(itinerary)):
+    # 這裡的 i 對應到 itinerary 的索引
     title, sub, desc = itinerary[i]
     sections_html += f"""
         <div class="section" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('{imgs[i]}');">
