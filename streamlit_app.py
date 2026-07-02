@@ -1,17 +1,49 @@
 import streamlit as st
 
-st.title("北海道家族之旅 ✈️")
-st.subheader("發哥旅行社：專屬行程對帳系統")
+# 設置頁面寬度
+st.set_page_config(layout="wide")
 
-# 互動功能：計算費用
-st.write("### 成員費用計算器")
-member_type = st.radio("選擇您的身分：", ("香港成員", "日本成員"))
+# 自訂 CSS 實現毛玻璃效果與 Apple 風格
+st.markdown("""
+    <style>
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+    .promo-logo {
+        width: 150px;
+        height: 150px;
+        background-color: #ff3b30;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+        box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-if member_type == "香港成員":
-    st.success("您的應付總額為: HK$ 9,412.38")
-    st.write("- 包含：機票、分攤酒店、巴士、景點及 4 人份 JR Pass")
-else:
-    st.warning("您的應付總額為: HK$ 6,529.41")
-    st.write("- 包含：AirDo 機票、分攤酒店、巴士、景點及當地交通")
+# 頁面內容
+st.title("北海道之美：夏日探索")
+st.write("---")
 
-st.info("如有疑問，請聯絡發哥旅行社：87235839")
+# 促銷 Logo
+st.markdown('<div class="promo-logo">立即報名<br>-50 HKD</div>', unsafe_allow_html=True)
+
+# 行程卡片
+with st.container():
+    st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+    st.header("✈️ 尊享航空體驗")
+    st.write("香港國泰航空與北海道國際航空 (AIRDO) 帶給您最頂級的空中禮遇。")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+st.write("## 旅程亮點")
+# 這裡可以繼續加入更多 Apple 風格的行程區塊...
