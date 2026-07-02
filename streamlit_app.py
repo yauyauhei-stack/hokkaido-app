@@ -20,9 +20,9 @@ st.markdown("""
     }
     
     /* 3. 個別調教文字大小的區塊 (你可以自由修改 px 數值) */
-    .title-size { font-size: 72px !important; font-weight: bold; margin-bottom: 20px; }
-    .subtitle-size { font-size: 36px !important; margin-bottom: 15px; }
-    .content-size { font-size: 24px !important; line-height: 1.8; margin-bottom: 10px; }
+    .title-size { font-size: 96px !important; font-weight: bold; margin-bottom: 20px; }/title
+    .subtitle-size { font-size: 36px !important; margin-bottom: 15px; }/second
+    .content-size { font-size: 24px !important; line-height: 1.8; margin-bottom: 10px; }/thrid
     
     /* 4. 移除所有玻璃效果，確保背景乾淨 */
     .clean-box {
@@ -36,7 +36,7 @@ st.markdown("""
 st.markdown('<div class="clean-box">', unsafe_allow_html=True)
 
 # 你可以在這裡自由呼叫不同的 class 來調整每一段的大小
-st.markdown('<div class="title-size">北海道：夏日探索之旅</div>', unsafe_allow_html=True)
+st.markdown('<div class="title-size">北海道之仲夏夜如夢之旅</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle-size">尊享頂級航空服務體驗</div>', unsafe_allow_html=True)
 st.markdown('<div class="content-size">透過香港國泰航空與北海道國際航空 (AIRDO)，為您的家庭打造一場難忘的冒險。</div>', unsafe_allow_html=True)
 
