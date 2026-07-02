@@ -21,8 +21,8 @@ st.markdown("""
     
     /* 3. 個別調教文字大小的區塊 (你可以自由修改 px 數值) */
     .title-size { font-size: 72px !important; font-weight: bold; margin-bottom: 20px; }/title
-    .subtitle-size { font-size: 36px !important; margin-bottom: 15px; }/second
-    .content-size { font-size: 24px !important; line-height: 1.8; margin-bottom: 10px; }/thrid
+    .subtitle-size { font-size: 50px !important; margin-bottom: 15px; }/second
+    .content-size { font-size: 50px !important; line-height: 1.8; margin-bottom: 10px; }/thrid
     
     /* 4. 移除所有玻璃效果，確保背景乾淨 */
     .clean-box {
