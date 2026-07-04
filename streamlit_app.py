@@ -1,7 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# 設定頁面
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 st.markdown("""<style>
     [data-testid="stAppViewContainer"] { background-color: black !important; }
@@ -9,7 +8,7 @@ st.markdown("""<style>
     #MainMenu, footer, header { visibility: hidden; }
 </style>""", unsafe_allow_html=True)
 
-# 您的原始行程資料 (完全保留，未作變更)
+# (行程資料保持不變)
 itinerary = [
     {"title": "北海道：仲夏夜如夢之旅 ✈️", "sub": "2026年7月16日 | 香港/東京 飛往北海道", "desc": "準備迎接北國的涼爽空氣與大自然饗宴。"},
     {"title": "DAY 1 🏨", "sub": "啟程：抵達與燒肉之夜", "desc": "香港團隊 (4人) 於 15:20 順利降落新千歲機場(CX580) | 隨即前往 JR 火車月台兌換「富良野地區鐵路週遊券」，並現場辦理特急列車指定席劃位，直達旭川。", "note1": "【東京隊會合】東京成員 (1人) 則於 18:50 降落旭川機場 ( HD 087 )，搭乘便利的機場巴士前往酒店會合。", "note2": "大隊步行前往旭川烏帕希酒店辦理 Check-in，全家人於酒店溫馨大團圓。", "note3": "晚上前往燒肉店品嚐極上和牛 🥩 | 入住札幌市中心酒店。"},
@@ -42,35 +41,23 @@ components.html(f"""
 <head>
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-        body {{ background: #000; color: white; font-family: 'Helvetica Neue', sans-serif; overflow: hidden; }}
+        body {{ background: #000; color: white; font-family: sans-serif; overflow: hidden; height: 100vh; }}
         
-        /* 頂部列 */
-        .top-bar {{ position: fixed; top: 0; width: 100%; height: 60px; background: rgba(20,20,20,0.9); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid #333; }}
-        .brand {{ font-weight: bold; font-size: 18px; color: #ffcc00; }}
+        .top-bar {{ position: fixed; top: 0; width: 100%; height: 60px; background: rgba(20,20,20,0.9); z-index: 1000; display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid #333; }}
         
-        /* 跑馬燈效果 */
-        .marquee-container {{ flex: 1; margin: 0 20px; overflow: hidden; white-space: nowrap; }}
-        .marquee {{ display: inline-block; animation: scroll 15s linear infinite; font-size: 14px; color: #fff; }}
-        @keyframes scroll {{ from {{ transform: translateX(100%); }} to {{ transform: translateX(-100%); }} }}
+        /* 修正滾動容器高度，扣除頂部列 60px */
+        .scroll-container {{ height: calc(100vh - 60px); margin-top: 60px; overflow-y: scroll; scroll-snap-type: y mandatory; }}
         
-        /* 語言選單 */
-        .lang-select {{ font-size: 12px; cursor: pointer; color: #aaa; }}
-        
-        .scroll-container {{ height: 100vh; overflow-y: hidden; scroll-snap-type: y mandatory; }}
-        .section {{ height: 100vh; display: flex; justify-content: center; align-items: center; background-size: cover; background-position: center; scroll-snap-align: start; }}
-        .text-box {{ width: 85%; max-width: 600px; padding: 30px; border-radius: 20px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); }}
-        h1 {{ font-size: 26px; margin-bottom: 5px; }}
-        .subtitle {{ margin-bottom: 15px; color: #ffcc00; }}
-        .content {{ line-height: 1.6; font-size: 15px; }}
+        .section {{ height: calc(100vh - 60px); display: flex; justify-content: center; align-items: center; background-size: cover; background-position: center; scroll-snap-align: start; }}
+        .text-box {{ width: 85%; max-width: 600px; padding: 30px; border-radius: 20px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); }}
     </style>
 </head>
 <body>
     <div class="top-bar">
-        <div class="brand">發哥旅行社 ✈️</div>
-        <div class="marquee-container">
-            <div class="marquee">📢 現正報名：現在加入行程每位減 HKD$50！一齊出發去北海道啦！</div>
+        <div style="color:#ffcc00; font-weight:bold;">發哥旅行社 ✈️</div>
+        <div style="flex:1; overflow:hidden; margin:0 20px;">
+            <marquee behavior="scroll" direction="left" style="color:white; font-size:14px;">📢 現正報名：現在加入行程每位減 HKD$50！一齊出發去北海道啦！</marquee>
         </div>
-        <div class="lang-select">EN | 中文 | 粵語 | 日本語</div>
     </div>
     
     <div class="scroll-container" id="container">
@@ -78,4 +65,4 @@ components.html(f"""
     </div>
 </body>
 </html>
-""", height=1000)
+""", height=800)
