@@ -8,11 +8,11 @@ st.markdown("""<style>
     #MainMenu, footer, header { visibility: hidden; }
 </style>""", unsafe_allow_html=True)
 
-# 幫你寫一個多語言轉換輔助函數
+# 多語言轉換輔助函數
 def m(zh, en, jp):
     return f'<span class="zh">{zh}</span><span class="en">{en}</span><span class="jp">{jp}</span>'
 
-# 所有行程資料，加入英文同日文翻譯 (100% 保留你原本嘅中文)
+# 行程資料
 itinerary = [
     {
         "title": "DAY 1 🏨", 
@@ -91,8 +91,9 @@ itinerary = [
     }
 ]
 
+# 在這裡將第一張圖片替換為你提供的相片連結
 imgs = [
-    'https://static.gltjp.com/glt/data/article/21000/20526/20231120_140429_94a4429a_w1920.webp', 
+    'https://lh3.googleusercontent.com/rd-gg/AEir0wIKQrqdLwc7OKOf12kkH9b44bOpPhmEz21K1WtROm44CCA_EYm9g7lIn2Fnnz7Li5-6sMyhMOnBmSp1QVsdjGSC6jJpkPOGojW4rsOC-xDa_EiwJTOOzUWOLcxHzYlxtr2DNd_45q0mqjPjnaBjXMBDs460PzQN6vmJH8z751ApkI_ZeO5iJFxv16pcKvhTCoxwuP2YZlLQs3bt_u0L-TuRWnlEm4Goree431eam3bGC5J-vRBAZOWPVAFpGZ112YDaer1qbjNHoaBE8Yf19WrAJivZVf2zjQ0Sqod_60x6V3gos6Zv2o0KyzaxJdY0fbzkOG4fBEY9mCbPD1_MeB-26B62flE1qHxgy8RUyVWjOT3dcroLmWvwpKhIqzT1h0JujB1k-XcbduSD5rywTs7hzcfJI5sQHYw-zVtnVZY_H6M2aQ8VelGjBxlwLgnqKbBq6y36mWuRUkhMjVa2Q-Ojqfvo1j3axjS9fbpJfRQ6Bt2RqBNjjnaJYdfc64QpK1AdEmqUmT1c330rkJuU73sk8r4ZiY5UlCl1yn5I77l7kj4KOiRw3TbJ1eWBviP_PpXG9I7kpa_h49ROiVLZqYew4-Bgal9sbdbHCpd7KphjhITnN9jveY4UalRLC2uAvMh8UIptw5dbZ9rMBhlKKhr2N-RNgSfF-uMCB8lRyGNawmJ312hCVEuZfVSRnkkLkX1lvR5DQMQtQ7FHc14GAXQ0NjQwM5ZsItgOozigLtUc3Kv7yYSNT04hLnU0I9DpRnn5II7yn7QMADr-GDPuX8tm2kr3O0R0aKNU8R1i84c-HPlrxmio1E9yaRXfdbyw86lAqSx7WjZu8iBHFewimGJNBv3XeDjaxijcNt7868evk1yRq7Omw0zQW9eyCYodAm4F_UFTsCcZPvb8DeR4_vfInYjoFlbhVYQW3pAxpf-KqEHISjslT3iX2EXPdDFB_HJ-rN82Xq2i-vlz2aTr2obXnGMgDXQojKXlB9MvMvjtaNiQ4wemCepxcBfRCy3wbfWWvxBSViR4PePXgrJEZyamVZ503H1FADzTiQ8msWlKdyN7TdEtAh9D1tjHiTY6XKhLUfGH_FebUMIrZdsgAj8e8g623HBYfHpLuS0kP1UfW4NGK6z3XnDWHceRRPLwvsH-eu22g1xf-uaa34rKdyYR0jIZewrpXi9x42b8HiqrLdUzHVvfDZjvOU20EuC6azB-tY3W6hX5s5kcbS4FgTmpDbx2fJ7MphA2t2NFPzCksX3jcI7JLLPuIRIVyuRWQEgk9_c5LS7YqXpn7cJvnXtUDpJL8JbxXe1L4Bjg3Umy9UFgdbHaG0s6lFNTQUpsaoCo-0rcW4YSO0fyVz70mcJeB0QH6xYzoFqvXXTAR3MCK3S4gvw=s1600', 
     'https://ak-d.tripcdn.com/images/0222n12000l3pxclpD02D_W_600_0_R5.webp', 
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxxCb13giR5qt9ifcOxxgdplCLM4sSXWwNFDMzQzm60jDOBkll5VvMsPs&s=10', 
     'https://images.trvl-media.com/place/6104012/f8fa157e-15a4-4533-84ef-b21cb5b53110.jpg', 
@@ -129,7 +130,6 @@ components.html(f"""
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{ background: #000; color: white; font-family: 'PingFang HK', sans-serif; overflow: hidden; height: 100vh; }}
         
-        /* === 語言切換核心邏輯 === */
         .lang-en .zh, .lang-en .jp {{ display: none !important; }}
         .lang-jp .zh, .lang-jp .en {{ display: none !important; }}
         .lang-zh .en, .lang-zh .jp {{ display: none !important; }}
@@ -137,12 +137,10 @@ components.html(f"""
         .lang-btn {{ cursor: pointer; transition: 0.2s; color: #aaa; }}
         .lang-btn:hover {{ color: #fff; }}
         
-        /* 亮起當前選擇的語言 */
         .lang-zh .btn-zh {{ color: #ffcc00; font-weight: bold; }}
         .lang-en .btn-en {{ color: #ffcc00; font-weight: bold; }}
         .lang-jp .btn-jp {{ color: #ffcc00; font-weight: bold; }}
         
-        /* UI 佈局 */
         .top-bar {{ position: fixed; top: 0; width: 100%; height: 60px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid #333; }}
         .main-scroll-container {{ height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }}
         .main-scroll-container::-webkit-scrollbar {{ display: none; }}
@@ -162,10 +160,8 @@ components.html(f"""
         .glass-box {{ width: 85%; max-width: 500px; padding: 30px; border-radius: 20px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2); text-align: left; }}
     </style>
 </head>
-<!-- 預設載入中文 -->
 <body class="lang-zh">
     <div class="top-bar">
-        <!-- 點擊回主頁 -->
         <div onclick="document.getElementById('welcome-page').scrollIntoView({{behavior: 'smooth'}})" style="color:#ffcc00; font-weight:bold; font-size:16px; white-space:nowrap; cursor:pointer;">
             {m("發哥旅行社 ✈️", "Fat Gor Travel ✈️", "ファットゴー旅行社 ✈️")}
         </div>
@@ -178,7 +174,6 @@ components.html(f"""
             </marquee>
         </div>
         
-        <!-- 真·語言切換按鈕 (觸發 JavaScript) -->
         <div style="font-size:12px; white-space:nowrap;">
             <span class="lang-btn btn-zh" onclick="setLanguage('zh')">繁</span> | 
             <span class="lang-btn btn-en" onclick="setLanguage('en')">EN</span> | 
@@ -214,7 +209,6 @@ components.html(f"""
                     </div>
                 </div>
                 
-                <!-- 其他四個 Coming Soon 卡片 -->
                 {''.join([f'''
                 <div class="card" style="opacity: 0.7;">
                     <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=600&auto=format&fit=crop" style="filter: grayscale(80%);">
@@ -231,7 +225,6 @@ components.html(f"""
         {sections_html}
     </div>
 
-    <!-- 加入 JavaScript 來實時切換語言 -->
     <script>
         function setLanguage(lang) {{
             document.body.className = 'lang-' + lang;
