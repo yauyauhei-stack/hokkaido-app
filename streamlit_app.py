@@ -26,9 +26,9 @@ itinerary = [
         "note2": m("大隊步行前往旭川烏帕希酒店辦理 Check-in，全家人於酒店溫馨大團圓。",
                    "The group walks to Hotel WBF Asahikawa for check-in. Family reunion at the hotel.",
                    "全員でホテルWBF旭川へ歩いて向かいチェックイン。ホテルで家族の温かい再会。"),
-        "note3": m("晚上前往燒肉店品嚐極上和牛 🥩 | 入住札幌市中心酒店。",
-                   "Evening: Enjoy premium Wagyu beef at a Yakiniku restaurant 🥩 | Check-in at Sapporo city center hotel.",
-                   "夜は焼肉店で極上和牛を堪能 🥩 | 札幌市内のホテルに宿泊。")
+        "note3": m("晚上前往燒肉店品嚐極上成吉思汗羊肉 🥩 | 入住札幌市中心酒店。",
+                   "Evening: Enjoy premium mutton at a Genghis Khan  🥩 | Check-in at Sapporo city center hotel.",
+                   "夜は焼肉店で極上チンギス・ハンの羊肉 🥩 | 札幌市内のホテルに宿泊。")
     },
     {
         "title": "DAY 2 🌸", 
