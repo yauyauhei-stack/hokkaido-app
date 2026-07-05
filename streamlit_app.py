@@ -91,15 +91,15 @@ itinerary = [
     }
 ]
 
-# 在這裡將第一張圖片替換為你提供的相片連結
+# 修正後的圖片列表 (移除了舊 Day 1，全部往前平移，最後加入機場相片)
 imgs = [
-    'https://static.gltjp.com/glt/data/article/21000/20526/20231120_140429_94a4429a_w1920.webp',
     'https://ak-d.tripcdn.com/images/0222n12000l3pxclpD02D_W_600_0_R5.webp', 
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxxCb13giR5qt9ifcOxxgdplCLM4sSXWwNFDMzQzm60jDOBkll5VvMsPs&s=10', 
     'https://images.trvl-media.com/place/6104012/f8fa157e-15a4-4533-84ef-b21cb5b53110.jpg', 
     'https://static.gltjp.com/glt/data/article/21000/20442/20230926_145350_43e48639_w1920.webp', 
     'https://hk.wamazing.com/media/wp-content/uploads/sites/5/2019/07/hokkaidomitsuioutlet_pixta_84488453_M.jpg.webp', 
-    'https://d1grca2t3zpuug.cloudfront.net/2025/10/2025shiroikoibitopark1-870x500-1761562254.webp'
+    'https://d1grca2t3zpuug.cloudfront.net/2025/10/2025shiroikoibitopark1-870x500-1761562254.webp',
+    'https://hk.wamazing.com/media/wp-content/uploads/sites/5/2019/09/shinchitoseairporttaxfree_pixta_94252250_M.jpg.webp'
 ]
 
 # 生成 HTML 行程
@@ -142,9 +142,12 @@ components.html(f"""
         .lang-jp .btn-jp {{ color: #ffcc00; font-weight: bold; }}
         
         .top-bar {{ position: fixed; top: 0; width: 100%; height: 60px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid #333; }}
-        .main-scroll-container {{ height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }}
+        
+        /* 加入了 -webkit-overflow-scrolling 確保手機順滑滾動 */
+        .main-scroll-container {{ height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }}
         .main-scroll-container::-webkit-scrollbar {{ display: none; }}
         
+        /* 歡迎頁保持你原來的背景圖片 */
         .welcome-page {{ height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; background: url('https://i.imgur.com/image_ae83e1.png') no-repeat center/cover; position: relative; }}
         .welcome-page::before {{ content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1; }}
         
@@ -195,6 +198,7 @@ components.html(f"""
             
             <div class="h-carousel">
                 <div class="card">
+                    <!-- 由於第一張圖已經變成了 Day 1 行程，這裡繼續提取新名單的首張圖作為卡片封面 -->
                     <img src="{imgs[0]}" alt="Hokkaido">
                     <div class="card-content">
                         <h2 style="font-size:18px;">
@@ -229,6 +233,14 @@ components.html(f"""
         function setLanguage(lang) {{
             document.body.className = 'lang-' + lang;
         }}
+        
+        // 滾動鎖定腳本：防止在最頂部（歡迎頁）繼續向上滾動導致出現空白邊界
+        const cont = document.getElementById('main-container');
+        cont.addEventListener('wheel', (e) => {{
+            if (cont.scrollTop === 0 && e.deltaY < 0) {{
+                e.preventDefault();
+            }}
+        }}, {{passive: false}});
     </script>
 </body>
 </html>
