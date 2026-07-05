@@ -12,9 +12,9 @@ st.markdown("""<style>
 # 📢 公告設定區 (隨時在這裡更改你的 Top Bar 公告)
 # ==========================================
 top_notice = {
-    "zh": "📢 現正報名：現在加入行程每位減 HKD$50！一齊出發去北海道啦！           📢發哥旅行社 ✈️正式營運！",
-    "en": "📢 Special Offer: Join now and save HKD$50 per person! Let's go to Hokkaido!           📢Fatgo Travel Agency ✈️ Officially operational!",
-    "jp": "📢 絶賛受付中：今ならお一人様50香港ドル割引！一緒に北海道へ行こう！           📢ファットゴー旅行代理店✈️正式に営業開始！"
+    "zh": "📢 現正報名：現在加入行程每位減 HKD$50！一齊出發去北海道啦！📢發哥旅行社 ✈️正式營運！",
+    "en": "📢 Special Offer: Join now and save HKD$50 per person! Let's go to Hokkaido!📢Fatgo Travel Agency ✈️ Officially operational!",
+    "jp": "📢 絶賛受付中：今ならお一人様50香港ドル割引！一緒に北海道へ行こう！📢ファットゴー旅行代理店✈️正式に営業開始！"
 }
 # ==========================================
 
