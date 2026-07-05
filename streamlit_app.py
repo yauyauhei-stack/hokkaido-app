@@ -147,7 +147,7 @@ components.html(f"""
         .main-scroll-container {{ height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }}
         .main-scroll-container::-webkit-scrollbar {{ display: none; }}
         
-        /* 歡迎頁保持你原來的背景圖片 */
+        /* 歡迎頁保持背景圖片 */
         .welcome-page {{ height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; background: url('https://i.imgur.com/image_ae83e1.png') no-repeat center/cover; position: relative; }}
         .welcome-page::before {{ content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1; }}
         
@@ -198,8 +198,8 @@ components.html(f"""
             
             <div class="h-carousel">
                 <div class="card">
-                    <!-- 由於第一張圖已經變成了 Day 1 行程，這裡繼續提取新名單的首張圖作為卡片封面 -->
-                    <img src="{imgs[0]}" alt="Hokkaido">
+                    <!-- 已將卡片封面替換為你指定的圖片 -->
+                    <img src="https://static.gltjp.com/glt/data/article/21000/20526/20231120_140429_94a4429a_w1920.webp" alt="Hokkaido">
                     <div class="card-content">
                         <h2 style="font-size:18px;">
                             {m("北海道仲夏夜如夢之旅 🌸", "Hokkaido Midsummer Dream 🌸", "北海道 真夏の夢の旅 🌸")}
