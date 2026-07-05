@@ -174,7 +174,7 @@ components.html(f"""
                 {m("📢 現正報名：現在加入行程每位減 HKD$50！一齊出發去北海道啦！", 
                    "📢 Special Offer: Join now and save HKD$50 per person! Let's go to Hokkaido!", 
                    "📢 絶賛受付中：今ならお一人様50香港ドル割引！一緒に北海道へ行こう！")
-                 m1("📢發哥旅行社 ✈️正式營運！",
+                 m("📢發哥旅行社 ✈️正式營運！",
                    "📢Fatgo Travel Agency ✈️ Officially operational!",
                    "📢ファットゴー旅行代理店✈️正式に営業開始！")}
             </marquee>
